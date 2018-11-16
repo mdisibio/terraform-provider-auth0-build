@@ -13,10 +13,15 @@ This repository eases building the auth0 terraform provider [terraform-provider-
     ```
 
 2. Build the provider. The resulting executables will be in the ./bin/ folder.
-    ```docker-compose run build```
+    
+    ```
+    docker-compose run build
+    ```
 
 3. Build and install the provider onto your host for immediate usage (useful to test changes locally).
 
    OSX
 
-    ```./build.sh```
+    ```
+    ./build.sh
+    ```
