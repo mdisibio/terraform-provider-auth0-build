@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  build:
+    image: golang:latest
+    command: "bash /go/gobuild.sh"
+    volumes:
+      - "./gobuild.sh:/go/gobuild.sh"
+      - "./bin:/go/bin"
+      - "./go-auth0:/go/src/github.com/yieldr/go-auth0"
+      - "./terraform-provider-auth0:/go/src/github.com/yieldr/terraform-provider-auth0"
