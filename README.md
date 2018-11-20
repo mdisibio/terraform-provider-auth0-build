@@ -25,3 +25,14 @@ This repository eases building the auth0 terraform provider [terraform-provider-
     ```
     ./build.sh
     ```
+
+## Testing
+Acceptance tests can be run by first exporting your Auth0 credentials and then targetting the `test` service. Note - This will create (and then destroy) real resources in your Auth0 account.
+
+```
+export AUTH0_DOMAIN=<your domain>
+export AUTH0_CLIENT_ID=<your client id>
+export AUTH0_CLIENT_SECRET=<your client secret>
+
+docker-compose run test
+```
