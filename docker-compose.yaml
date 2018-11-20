@@ -7,5 +7,18 @@ services:
     volumes:
       - "./gobuild.sh:/go/gobuild.sh"
       - "./bin:/go/bin"
-      - "./go-auth0:/go/src/github.com/yieldr/go-auth0"
       - "./terraform-provider-auth0:/go/src/github.com/yieldr/terraform-provider-auth0"
+      # Mounting go-auth0 package into the /vendor folder, to pick up local changes if needed.
+      - "./go-auth0:/go/src/github.com/yieldr/terraform-provider-auth0/vendor/github.com/yieldr/go-auth0"
+
+  # Acceptance tests; will create and delete real resources in Auth0
+  test:
+    image: golang:latest
+    command: "bash -c 'cd /go/src/github.com/yieldr/terraform-provider-auth0/auth0 && go test -v'"
+    volumes:
+      - "./terraform-provider-auth0:/go/src/github.com/yieldr/terraform-provider-auth0"
+    environment:
+      - TF_ACC=1
+      - AUTH0_DOMAIN=$AUTH0_DOMAIN
+      - AUTH0_CLIENT_ID=$AUTH0_CLIENT_ID
+      - AUTH0_CLIENT_SECRET=$AUTH0_CLIENT_SECRET
